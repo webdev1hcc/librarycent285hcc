@@ -28,7 +28,7 @@ drop table if exists books cascade;
 create table books(
   id integer not null primary key default nextval('book_id_seq'),
   title text,
-  genre text
+  isbn text unique
 );
 drop table if exists author_book cascade;
 create table author_book(
@@ -38,7 +38,7 @@ create table author_book(
 
 -- create author_book_view
 create or replace view author_book_view as
-  select authors.id as authid,authors.first_name,authors,last_name,
-  authors.email,books.id as bookid,books.title,books.genre from
+  select authors.id as authid,authors.first_name,authors.last_name,
+  authors.email,books.id as bookid,books.title,books.isbn from
   authors join author_book on authors.id=author_book.author_id join
   books on author_book.book_id=books.id;
