@@ -1,0 +1,13 @@
+/* author_book.css */
+data {
+  display: table;
+  margin: 5px;
+}
+author_book_rec {
+  display: table-row;
+}
+authid ,first_name ,last_name ,email ,bookid ,title ,isbn {
+  display: table-cell;
+  border: 2px solid;
+  padding: 2px;
+}
