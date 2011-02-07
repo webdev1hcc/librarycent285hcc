@@ -40,13 +40,13 @@ create or replace function insertAuthBook(_fname text,_lname text,
     authid integer;
     bookid integer;
   begin
-    sql1 := 'coalesce((select id from authors where email = ' || ''
-      || quote_literal(_email) || '' || ')' || ',insertAuthor(' 
-      || '''' || _fname || '''' || ',' || '''' ||  _lname || '''' || 
-      ',' || '''' ||  _email || '''' || '))';
-    sql2 := 'coalesce((select id from books where isbn = ' || ''
-      || quote_literal(_isbn) || '' || ')' || ',insertBook(' ||
-      '''' || _title || '''' || ',' || '''' || _isbn || '''' || '))';
+    sql1 := 'coalesce((select id from authors where email = '
+      || quote_literal(_email) || ')' || ',insertAuthor(' 
+      || quote_literal(_fname) || ',' || quote_literal(_lname) || 
+      ',' || quote_literal(_email) || '))';
+    sql2 := 'coalesce((select id from books where isbn = ' 
+      || quote_literal(_isbn) || ')' || ',insertBook(' ||
+      quote_literal(_title) || ',' || quote_literal(_isbn) || '))';
     execute 'insert into author_book (author_id,book_id) values ('
       || sql1 || ',' || sql2 || ')';
     return 't';
